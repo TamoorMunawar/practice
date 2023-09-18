@@ -12,7 +12,7 @@ class ProductService {
       int page, Map<String, dynamic> filters) async {
     final response = await http.get(
       Uri.parse(
-          'http://circlek.thezits.com/mobileappv2/apiv1/getProductsLists?user_token=auld0g8dszgomrwd41d8cd98f00b204e9800998ecf8427e&merchant_id=19&page=$page'),
+          'http://circlek.thezits.com/mobileappv2/apiv1/getProductsLists?user_token=auld0g8dszgomrwd41d8cd98f00b204e9800998ecf8427e&merchant_id=19&page=1&per_pahe=50'),
     );
     if (response.statusCode == 200) {
       ProductModel product = ProductModel.fromJson(jsonDecode(response.body));
@@ -22,6 +22,7 @@ class ProductService {
       //     .map((json) => ProductModel.fromJson(json))
       // //     .toList();
       // print(productList.length);
+      print(product.details?.data?.length);
       print("ccccccccccccccccccccccccccccccchut");
       return product;
     } else {

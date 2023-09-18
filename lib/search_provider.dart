@@ -19,8 +19,13 @@ class ProductProvider with ChangeNotifier {
           await productService.fetchProducts(currentPage, {});
       Details? details = newProducts.details;
       List<Data>? alldata = details!.data;
-      products.addAll(alldata!);
-      currentPage++;
+      if(alldata != null){
+        products.addAll(alldata);
+        currentPage++;
+      }else{
+        throw Exception('Failed to load products');
+      }
+
     } catch (e) {
       // Handle errors here
     } finally {
@@ -40,6 +45,8 @@ class ProductProvider with ChangeNotifier {
       Search.Details? details = newSearch.details;
       List<Search.Data>? alldat = details!.data;
       filteredProducts.addAll(alldat!);
+      print(filteredProducts.length);
+      print("filtered product");
     } catch (e) {
       // Handle errors here
     } finally {
